@@ -15,12 +15,6 @@ export const taskData = {
   title: 'Test Task',
   state: 'TASK_INBOX',
   updatedAt: new Date(2020, 0, 1, 9, 0),
-
-  id: '2',
-  title: '2nd Task',
-  state: 'TASK_INBOX',
-  updatedAt: new Date(2020, 0, 1, 9, 0),
-
 };
 
 export const actionsData = {
