@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 
 import TaskList from './TaskList';
 
-export function PureInboxScreen({ error }) {
+import Task from './Task';
+
+export function PureInboxScreen({ error, tasks, onPinTask, onArchiveTask }) {
+  const events = {
+    onPinTask,
+    onArchiveTask,
+  };
+
   if (error) {
     return (
       <div className="page lists-show">
@@ -17,6 +24,11 @@ export function PureInboxScreen({ error }) {
     );
   }
 
+  const tasksInOrder = [
+    ...tasks.filter(t => t.state === 'TASK_PINNED'),
+    ...tasks.filter(t => t.state !== 'TASK_PINNED'),
+  ];
+
   return (
     <div className="page lists-show">
       <nav>
@@ -24,7 +36,8 @@ export function PureInboxScreen({ error }) {
           <span className="title-wrapper">Taskbox</span>
         </h1>
       </nav>
-      <TaskList />
+      {/* <TaskList /> */}
+      {tasksInOrder.map(task => <Task key={task.id} task={task} {...events} />)}
     </div>
   );
 }
@@ -37,4 +50,5 @@ PureInboxScreen.defaultProps = {
   error: null,
 };
 
-export default connect(({ error }) => ({ error }))(PureInboxScreen);
+export default connect(
+  ({ error }) => ({ error }))(PureInboxScreen);
