@@ -51,4 +51,7 @@ PureInboxScreen.defaultProps = {
 };
 
 export default connect(
+  ({ tasks }) => ({
+    tasks: tasks.filter(t => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED'),
+  }),
   ({ error }) => ({ error }))(PureInboxScreen);
